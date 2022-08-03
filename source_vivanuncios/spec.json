@@ -1,0 +1,32 @@
+{
+  "documentationUrl": "https://docsurl.com",
+  "connectionSpecification": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Vivanuncios.com",
+    "type": "object",
+    "required": ["Url", "Telefono", "Sitio", "Referencia", "Message"],
+    "additionalProperties": false,
+    "properties": {
+      "Url": {
+        "type": "string",
+        "description": "Search Url"
+      },
+      "Telefono": {
+        "type": "string",
+        "description": "Telefono que se muestra en el mensaje"
+      },
+      "Sitio": {
+        "type": "string",
+        "description": "Sitio que se muestra en el mensaje"
+      },
+      "Referencia": {
+        "type": "string",
+        "description": "Referencia que se muestra en el mensaje"
+      },
+      "Message": {
+        "type": "string",
+        "description": "VARIABLES: titulo, precio, zona, telefono, sitio, referencia, telefono\n Hola {[nombre]|que tal como estás?|como te va?}, {vi tu publicación|estaba viendo una publicación tuya} [titulo] con precio de [precio], {vi que está en la zona|y me di cuenta que estaba en la zona} [zona], {quiero hacerte una propuesta y quiero más información| tengo unas dudas y quiero preguntarte unas cosas| tengo unas dudas y me gustaría pregunta unos puntos importantes} te dejo mi sitio web [sitio] y la referencia [referencia] para seguir en contacto, este mes en temas legales de escrituración te propongo hacerlo con un descuento para agilizar la operación. Gracias, te paso mi whatsapp por si tienes dudas: [telefono]"
+      }
+    }
+  }
+}
