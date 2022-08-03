@@ -4,6 +4,7 @@
 
 from typing import Dict, Generator
 import time
+from datetime import datetime
 import json
 
 from . import Scraper
@@ -50,16 +51,23 @@ class SourceVivanuncios(Source):
             "url": {"type": "string"},
             "zone": {"type": "string"},
             "adid": {"type": "string"},
-            "UserName": {"type": ["string", None]},
-            "ConstructedArea":{"type": ["integer", None]},
-            "NumberBathrooms": {"type": ["string", None]},
-            "AreaInMeters": {"type": ["integer", None]},
-            "Phone": {"type": ["string", None]},
-            "ForRentBy": {"type": ["string", None]},
-            "WebSiteUrl": {"type": ["string", None]},
-            "NumberBedrooms": {"type": ["string", None]},
-            "AmenitiesRental": {"type": ["string", None]},
-          }
+            "UserName": {"type": "string"},
+            "ConstructedArea":{"type": "integer"},
+            "NumberBathrooms": {"type": "string"},
+            "AreaInMeters": {"type": "integer"},
+            "Phone": {"type": "string"},
+            "ForRentBy": {"type": "string"},
+            "WebSiteUrl": {"type": "string"},
+            "NumberBedrooms": {"type": "string"},
+            "AmenitiesRental": {"type": "string"},
+          },
+          "required": [
+            "title",
+            "price",
+            "url",
+            "zone",
+            "adid"
+          ]
         }
 
         streams.append(AirbyteStream(name=stream_name, json_schema=json_schema))
@@ -92,10 +100,11 @@ class SourceVivanuncios(Source):
 
         #Print the messages
         airbyte_messages = [
-            AirbyteMessage(type=Type.RECORD,
-                record=AirbyteRecordMessage(stream="Properties", data=post),
+            AirbyteMessage(
+                type=Type.RECORD,
+                record=AirbyteRecordMessage(stream="Properties", data=data, emitted_at=int(datetime.now().timestamp()) * 1000),
             )
-            for post in props
+            for data in props
         ]
 
         yield from airbyte_messages
